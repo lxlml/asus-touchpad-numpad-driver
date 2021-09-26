@@ -13,6 +13,9 @@ elif [[ $(sudo pacman -h 2>/dev/null) ]]; then
     echo 'pacman is here' && sudo pacman --noconfirm -S libevdev python-libevdev i2c-tools git
 elif [[ $(sudo dnf install 2>/dev/null) ]]; then
     echo 'dnf is here' && sudo dnf -y install libevdev python-libevdev i2c-tools git
+elif [[ $(sudo xbps-install 2> /dev/null) ]]; then
+    echo 'xbps is here' && xbps-install -S libevdev python3-libevdev i2c-tools i2c-tools-devel git
+fi
 fi
 
 modprobe i2c-dev
@@ -106,9 +109,11 @@ do
     esac
 done
 
+mkdir -p /etc/sv/Asus-touchpad-service
 
-echo "Add asus touchpad service in /etc/systemd/system/"
-cat asus_touchpad.service | LAYOUT=$model PERCENTAGE_KEY=$percentage_key envsubst '$LAYOUT $PERCENTAGE_KEY' > /etc/systemd/system/asus_touchpad_numpad.service
+echo "Add asus touchpad service in /etc/sv"
+cat run | LAYOUT=$model PERCENTAGE_KEY=$percentage_key envsubst '$LAYOUT $PERCENTAGE_KEY' > /etc/sv/Asus-touchpad-service/run
+chmod +x /etc/sv/Asus-touchpad-service/run
 
 mkdir -p /usr/share/asus_touchpad_numpad-driver/numpad_layouts
 mkdir -p /var/log/asus_touchpad_numpad-driver
@@ -117,20 +122,21 @@ install -t /usr/share/asus_touchpad_numpad-driver/numpad_layouts numpad_layouts/
 
 echo "i2c-dev" | tee /etc/modules-load.d/i2c-dev.conf >/dev/null
 
-systemctl enable asus_touchpad_numpad
+ln -s /etc/sv/asus_touchpad_numpad /var/service
 
 if [[ $? != 0 ]]
 then
-	echo "Something gone wrong while enabling asus_touchpad_numpad.service"
+	echo "Something has gone wrong while enabling the Asus touchpad runit service"
 	exit 1
 else
 	echo "Asus touchpad service enabled"
 fi
 
-systemctl restart asus_touchpad_numpad
+sv up Asus-touchpad-service
+
 if [[ $? != 0 ]]
 then
-	echo "Something gone wrong while enabling asus_touchpad_numpad.service"
+	echo "Something has gone wrong while starting the Asus touchpad runit service"
 	exit 1
 else
 	echo "Asus touchpad service started"
