@@ -128,11 +128,11 @@ then
 	echo "Something has gone wrong while enabling the Asus touchpad runit service"
 	exit 1
 else
-	echo "Asus touchpad service enabled"
+	echo "Asus touchpad service enabled
+	Please wait...."
 fi
 
-
-sleep 10
+sleep 10 #runit needs time before you can use the sv commands
 
 sv up asus-touchpad-service
 
