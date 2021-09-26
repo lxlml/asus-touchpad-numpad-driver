@@ -14,7 +14,7 @@ then
 	exit 1
 fi
 
-sv down asus_touchpad_numpad
+sv down asus-touchpad-service
 
 if [[ $? != 0 ]]
 then
@@ -22,14 +22,14 @@ then
 	exit 1
 fi
 
-rm -rf /var/service/asus_touchpad_numpad
+rm -rf /var/service/asus-touchpad-service
 if [[ $? != 0 ]]
 then
 	echo "Asus touchpad runit service cannot be disabled correctly..."
 	exit 1
 fi
 
-rm -rf /etc/sv/asus_touchpad_numpad
+rm -rf /etc/sv/asus-touchpad-service
 if [[ $? != 0 ]]
 then
 	echo "/lib/systemd/system/asus_touchpad_numpad.service cannot be removed correctly..."
