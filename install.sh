@@ -110,7 +110,7 @@ done
 
 mkdir -p /etc/sv/asus-touchpad-service
 
-echo "Add asus touchpad service in /etc/sv"
+echo "Added asus touchpad service in /etc/sv"
 cat run | LAYOUT=$model PERCENTAGE_KEY=$percentage_key envsubst '$LAYOUT $PERCENTAGE_KEY' > /etc/sv/asus-touchpad-service/run
 chmod +x /etc/sv/asus-touchpad-service/run
 
