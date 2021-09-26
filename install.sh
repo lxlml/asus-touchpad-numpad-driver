@@ -132,7 +132,7 @@ else
 fi
 
 
-sleep 3
+sleep 10
 
 sv up asus-touchpad-service
 
