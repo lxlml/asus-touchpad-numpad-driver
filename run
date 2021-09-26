@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/shk
 exec /usr/share/asus_touchpad_numpad-driver/asus_touchpad.py $LAYOUT $PERCENTAGE_KEY
