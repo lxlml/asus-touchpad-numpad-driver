@@ -1,4 +1,6 @@
-# Asus touchpad numpad driver
+# Asus touchpad numpad driver (runit version)
+
+tested on void linux
 
 | Without % = symbols             |  With % = symbols       |  With % = symbols (but incompatible with the non-universal version) |
 |:-------------------------:|:-------------------------:|:-------------------------:|
@@ -51,6 +53,10 @@ sudo pacman -S libevdev python-libevdev i2c-tools git
 ```
 sudo dnf install libevdev python-libevdev i2c-tools git
 ```
+- Void Linux:
+```
+sudo xbps-install -S libevdev python3-libevdev i2c-tools i2c-tools-devel git
+```
 
 Then enable i2c
 ```
@@ -60,7 +66,7 @@ sudo i2cdetect -l
 
 Now you can get the latest ASUS Touchpad Numpad Driver for Linux from Git and install it using the following commands.
 ```
-git clone https://github.com/mohamed-badaoui/asus-touchpad-numpad-driver
+git clone https://github.com/lxlml/asus-touchpad-numpad-driver.git
 cd asus-touchpad-numpad-driver
 sudo ./install.sh
 ```
@@ -71,13 +77,6 @@ To adjust numpad brightness, tap top left corner touchpad area.
 To uninstall, just run:
 ```
 sudo ./uninstall.sh
-```
-
-**Troubleshooting**
-
-For some operating systems with boot failure (Pop!OS, Mint, ElementaryOS, SolusOS), before installing, please uncomment in the asus_touchpad.service file, this following property and adjust its value:
-```
-# ExecStartPre=/bin/sleep 2
 ```
 
 It is an adaptation made thanks to:
