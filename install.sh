@@ -108,11 +108,11 @@ do
     esac
 done
 
-mkdir -p /etc/sv/Asus-touchpad-service
+mkdir -p /etc/sv/asus-touchpad-service
 
 echo "Add asus touchpad service in /etc/sv"
-cat run | LAYOUT=$model PERCENTAGE_KEY=$percentage_key envsubst '$LAYOUT $PERCENTAGE_KEY' > /etc/sv/Asus-touchpad-service/run
-chmod +x /etc/sv/Asus-touchpad-service/run
+cat run | LAYOUT=$model PERCENTAGE_KEY=$percentage_key envsubst '$LAYOUT $PERCENTAGE_KEY' > /etc/sv/asus-touchpad-service/run
+chmod +x /etc/sv/asus-touchpad-service/run
 
 mkdir -p /usr/share/asus_touchpad_numpad-driver/numpad_layouts
 mkdir -p /var/log/asus_touchpad_numpad-driver
@@ -121,7 +121,7 @@ install -t /usr/share/asus_touchpad_numpad-driver/numpad_layouts numpad_layouts/
 
 echo "i2c-dev" | tee /etc/modules-load.d/i2c-dev.conf >/dev/null
 
-ln -s /etc/sv/Asus-touchpad-service /var/service
+ln -s /etc/sv/asus-touchpad-service /var/service
 
 if [[ $? != 0 ]]
 then
@@ -134,7 +134,7 @@ fi
 
 sleep 3
 
-sv up Asus-touchpad-service
+sv up asus-touchpad-service
 
 if [[ $? != 0 ]]
 then
