@@ -121,7 +121,7 @@ install -t /usr/share/asus_touchpad_numpad-driver/numpad_layouts numpad_layouts/
 
 echo "i2c-dev" | tee /etc/modules-load.d/i2c-dev.conf >/dev/null
 
-ln -s /etc/sv/asus_touchpad_numpad /var/service
+ln -s /etc/sv/Asus-touchpad-service/var/service
 
 if [[ $? != 0 ]]
 then
@@ -130,6 +130,9 @@ then
 else
 	echo "Asus touchpad service enabled"
 fi
+
+
+sleep 3
 
 sv up Asus-touchpad-service
 
