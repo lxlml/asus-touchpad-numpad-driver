@@ -1,2 +1,4 @@
 #!/bin/sh
 exec /usr/share/asus_touchpad_numpad-driver/asus_touchpad.py $LAYOUT $PERCENTAGE_KEY
+
+#todo add logging
