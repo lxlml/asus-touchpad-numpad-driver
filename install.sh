@@ -16,7 +16,6 @@ elif [[ $(sudo dnf install 2>/dev/null) ]]; then
 elif [[ $(sudo xbps-install 2> /dev/null) ]]; then
     echo 'xbps is here' && xbps-install -S libevdev python3-libevdev i2c-tools i2c-tools-devel git
 fi
-fi
 
 modprobe i2c-dev
 
